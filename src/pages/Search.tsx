@@ -1,7 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useToast } from "@/components/ui/use-toast";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, ArrowUp, Share2, Filter } from 'lucide-react';
+import Header from '@/components/Header';
+import NavigationTabs from '@/components/NavigationTabs';
+import SearchBar from '@/components/SearchBar';
 import TrademarkResults from '@/components/TrademarkResults';
 import TrademarkFilters from '@/components/TrademarkFilters';
 import TrademarkRegistrationSidebar from '@/components/TrademarkRegistrationSidebar';
@@ -57,12 +61,6 @@ const Search: React.FC = () => {
     }
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // In a real application, you would fetch data for the new page
-    // fetchTrademarks(query, page);
-  };
-
   const handleSearch = (searchQuery: string) => {
     if (searchQuery.trim()) {
       setSearchParams({ q: searchQuery });
@@ -74,8 +72,18 @@ const Search: React.FC = () => {
     }
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // In a real application, you would fetch data for the new page
+    // fetchTrademarks(query, page);
+  };
+
   return (
-    <div className="min-h-screen bg-white pt-16"> {/* Added pt-16 to account for the sticky header */}
+    <div className="min-h-screen bg-white">
+      <Header />
+      <NavigationTabs />
+      <SearchBar onSearch={handleSearch} initialValue={query} />
+      
       {loading ? (
         <div className="container mx-auto px-4 py-12 text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-500 border-r-transparent"></div>
