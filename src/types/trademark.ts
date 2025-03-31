@@ -9,5 +9,8 @@ export interface Trademark {
   statusDate: string;
   description: string;
   class: string;
+  classCode?: string;
   logo?: string;
+  statusType?: 'Live/Registered';
+  nextRenewalDate?: string;
 }
